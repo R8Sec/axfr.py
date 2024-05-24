@@ -56,7 +56,12 @@ def zone_transfer(domain, nameserver):
 def main():
     parser = argparse.ArgumentParser(description='DNS Zone Transfer', usage='dnsenum.py -d <domain>')
     parser.add_argument('-d', '--domain', help='Target domain', required=True)
-    parser.add_argument('-n', '--nameservers', help='Comma-separated list of nameserver IPs', required=False)
+    parser.add_argument(
+        '-n',
+        '--nameservers',
+        required=False,
+        help='List of nameserver IPs (e.g., "8.8.8.8, 8.8.4.4, 1.1.1.1")',
+    )
     args = parser.parse_args()
 
     # Initialise dns.resolver.Resolver class
