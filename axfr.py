@@ -4,7 +4,7 @@ import dns.query as dq
 import dns.resolver as dr
 import argparse
 
-TIMMEOUT = 10    # Set timeout for DNS queries
+TIMEOUT = 10    # Set timeout for DNS queries
 
 # Function to find name servers
 def find_nameservers(domain):
