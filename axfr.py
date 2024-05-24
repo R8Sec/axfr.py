@@ -35,7 +35,7 @@ def find_nameservers(domain):
 
 def zone_transfer(domain, nameserver):
     try:    # Try zone transfer
-        axfr = dz.from_xfr(dq.xfr(nameserver, domain, lifetime=TIMMEOUT))
+        axfr = dz.from_xfr(dq.xfr(nameserver, domain, lifetime=TIMEOUT))
 
     # Print error if zone transfer fails and return
     except Exception as error:
