@@ -23,7 +23,7 @@ def find_nameservers(domain):
     for ns in nameservers_found:
         nameserver_host = [ip.to_text() for ip in dr.resolve(ns, 'A')]
         nameservers += nameserver_host
-        print(f'{ns} ({nameserver_host})')
+        print(f'{ns} {nameserver_host[0]}')  # Print nameserver and its IP address
 
     proceed = input("Attempt zone transfer on each of them? (Y/n): ")
     if proceed.lower() in ("y", ""):  # Empty string defaults to "Y"
