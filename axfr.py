@@ -70,7 +70,7 @@ def setup_nameservers(nameservers, domain):
 
 # Main
 def main():
-    parser = argparse.ArgumentParser(description='DNS Zone Transfer', usage='dnsenum.py -d <domain>')
+    parser = argparse.ArgumentParser(description='DNS Zone Transfer', usage='axfr.py -d <domain>')
     parser.add_argument('-d', '--domain', help='Target domain', required=True)
     parser.add_argument('-t', '--timeout', type=int, default=10, help='Timeout for DNS queries (default: 10)')
     parser.add_argument(
@@ -99,20 +99,19 @@ def main():
         zone_data = zone_transfer(domain, nameserver, timeout)
         all_zone_data.append(zone_data)
 
+    print("\n")
     unique_zone_data = list(set(frozenset(zone) for zone in all_zone_data))
-    print("Zone Transfer Results:\n")
     for i, zone_data in enumerate(unique_zone_data):
-        print(f"Zone transfer from {r.nameservers[i]}:\n")
+        print(f"[+] Zone transfer from {r.nameservers[i]}:\n")
         print_zone_data(zone_data)
         print("\n")
 
     if len(unique_zone_data) > 1:
-        print("Differences between zone transfer results found:\n")
+        print("[+] Differences between nameserver answers found:\n")
         base_data = unique_zone_data[0]
         for other_data in unique_zone_data[1:]:
             differences = base_data.symmetric_difference(other_data)
             if differences:
-                print("Differences found:\n")
                 print_zone_data(differences)
                 print("\n")
 
